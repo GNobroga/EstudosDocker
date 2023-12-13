@@ -1,0 +1,24 @@
+services:
+  db:
+    container_name: custom_postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres 
+      POSTGRES_PASSWORD: postgres 
+    ports:
+      - 5000:5432
+    volumes:
+      - save:/var/lib/postgresql/data
+  pgAdmin:
+    container_name: custom_pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "gabrielcardoso@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - 4000:80
+    depends_on:
+      - db
+
+volumes:
+  save:
